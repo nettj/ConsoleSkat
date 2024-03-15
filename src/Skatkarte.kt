@@ -1,0 +1,1 @@
+data class Skatkarte(val symbol: String, val name: String, val wert: Int, val farbwert: Int)

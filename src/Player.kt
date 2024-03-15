@@ -2,33 +2,36 @@ class Player(name: String) {
     private var _name: String
     private val _cardsInHand: MutableList<Skatkarte> = mutableListOf()
     private val _wenzel: MutableList<Int> = mutableListOf()
-    private var _maxBidValue: Int = 0
-    private var _gegenSpieler: Boolean = false
+    protected var _maxBidValue: Int = 0
+    private var _opponent: Boolean = false
     private val wenzelWert = 2
     private var _currentBidStep = 0
 
-    init {
-        _name = name
+    // Spieler ist gerade der Gegenspieler (setzen)
+    fun opponent(o: Boolean) {
+        _opponent = o
     }
-    fun bid(): Int? {
-        if (BID_STEPS[_currentBidStep] <= _maxBidValue) {
-            val bidValue = BID_STEPS[_currentBidStep]
-            _currentBidStep += 1
-            return bidValue
-        }
 
+    // Bin ich der Gegenspieler
+    fun opponent(): Boolean {
+        return _opponent
+    }
+
+    open fun bid(): Int? {
+        if (BID_STEPS[_currentBidStep] <= _maxBidValue) {
+            println("Du kannst bis $_maxBidValue bieten! Möchtest Du bieten? j/n")
+            val input = readln().first()
+            if (input == 'j') {
+                val bidValue = BID_STEPS[_currentBidStep]
+                _currentBidStep += 1
+                return bidValue
+            }
+
+        }
         return null
     }
 
-    fun name(): String {
-        return _name
-    }
-
-    fun name(giveName: String) {
-        _name = giveName
-    }
-
-    fun giveCards(cards: List<Skatkarte>) {
+    fun getCards(cards: List<Skatkarte>) {
         _cardsInHand.addAll(cards)
     }
 
@@ -54,7 +57,10 @@ class Player(name: String) {
             _maxBidValue = reizwert * groessteAnzahl.first
             return
         }
-        _gegenSpieler = true
         _maxBidValue = 0
+    }
+
+    override fun toString(): String {
+        return name
     }
 }

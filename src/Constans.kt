@@ -44,3 +44,17 @@ val BID_VALUE = mapOf<List<Int>, Int>(
     listOf(12, 10) to 2,
 
     )
+
+val COMPUTER_PLAYER_NAMES = listOf<String>(
+    "Wildschwein",
+    "Lord Helmchen",
+    "Ferdinand der Große",
+    "Osterhase",
+    "Weihnachtsmann",
+    "Zahnfee",
+    "Nikolaus",
+    "Esel",
+    "Drache",
+    "Hund"
+
+)
